@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} - tarifs{% endblock %}
+
+{% block page_content %}
+    <div class="row">
+        <div class="col-12">
+            <div class="bg-dark text-white rounded-lg p-5 mt-2 mb-2">
+                <div class="d-flex align-items-center justify-content-between">
+                    <div class="col-10">
+                        <h1 class="display-4">Gestion des tarifs</h1>
+                    </div>
+                    <div class="col-2">
+                        {% if last_update == null %}
+                        {% else %}
+                            <strong>Dernière mise à jour :</strong><br/>
+                            {{ last_update|date('d M Y') }}
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-11 offset-1">
+            <ul class="list-group">
+                {% for tarif in tarifs %}
+                    <li class="list-group-item d-flex justify-content-between">
+                        <div class="d-flex w-100 justify-content-between align-items-center">
+                            <div>{{ tarif.name }} : <small>{{ tarif.montant|format_currency('EUR') }}</small></div>
+                            <a href="{{ path('tarifs_edit', { id : tarif.id }) }}" class="btn btn-sm btn-outline-info">modifier</a>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endblock %}

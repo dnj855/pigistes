@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} - modifier {{ pigiste.prenom }} {{ pigiste.nom }}{% endblock %}
+
+{% block page_content %}
+    <div class="row">
+        <div class="col-6 offset-3">
+            <h1>Modifier un pigiste</h1>
+            <p>
+                {{ form(form) }}
+            </p>
+        </div>
+    </div>
+{% endblock %}

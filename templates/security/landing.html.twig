@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+            {% for label, messages in app.flashes %}
+                {% for message in messages %}
+                    <div class="alert-{{ label }} alert alert-dismissible fade show mt-2">
+                        {{ message }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                {% endfor %}
+            {% endfor %}
+        </div>
+        <div class="row">
+            <div class="col-6 offset-3">
+                <div class="border border-1 rounded-3 bg-primary mt-5 pt-3 px-3 text-light">
+                    <h2 class="text-center">Gestion des pigistes</h2>
+                    <p>
+                        {{ form_start(form) }}
+                        Saisir votre e-mail :<br/>
+                        {{ form_widget(form.email) }}
+                    </p>
+                    <p class="d-flex justify-content-between">
+                        {{ form_widget(form.account_creation, { 'attr' : { 'class' : 'btn-light'}}) }}
+                        {{ form_widget(form.submit, { 'attr' : { 'class' : 'btn-success'}}) }}
+                        {{ form_end(form) }}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,73 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} - générer un contrat{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker3.min.css"
+          integrity="sha512-rxThY3LYIfYsVCWPCW9dB0k+e3RZB39f23ylUYTEuZMDrN/vRqLdaCBo/FbvVT6uC2r0ObfPzotsfKF9Qc5W5g=="
+          crossorigin="anonymous"/>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"
+            integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"
+            integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ=="
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.fr.min.js"
+            integrity="sha512-fx3aztaUjb4NyoD+Tso5g7R1l29bU3jnnTfNRKBiY9fdQOHzVhKJ10wEAgQ1zM/WXCzB9bnVryHD1M40775Tsw=="
+            crossorigin="anonymous"></script>
+{% endblock %}
+
+{% block page_content %}
+    <div class="row">
+        <div class="col-12">
+            <div class="bg-dark text-white rounded-lg p-5 mt-2 mb-2">
+                <div class="d-flex align-items-center justify-content-between">
+                    <div class="col-10">
+                        <h1 class="display-4 mb-0 pb-0">Générer un contrat<br/></h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            {{ form_start(form) }}
+            <p class="mt-1">
+                {{ form_row(form.pigiste) }}
+            </p>
+            <p class="mt-1">
+                {{ form_row(form.tarif) }}
+            </p>
+            <p class="mt-1">
+                {{ form_row(form.centre_de_cout) }}
+            </p>
+        </div>
+        <div class="col-6">
+            <p class="mt-1">
+                {{ form_row(form.date_debut, { 'attr' : { 'class' : 'datepicker'}}) }}
+            </p>
+            <p class="mt-1">
+                {{ form_row(form.date_fin, {'attr' : {'class' : 'datepicker'}}) }}
+            </p>
+            <p class="mt-1">
+                {{ form_row(form.motif) }}
+            </p>
+            <p class="mt-1 text-right">
+                {{ form_row(form.submit) }}
+            </p>
+            {{ form_end(form) }}
+        </div>
+    </div>
+    <script>
+        $('.datepicker').datepicker({
+            format: "yyyy-mm-dd",
+            language: "fr",
+            orientation: "bottom"
+        });
+    </script>
+{% endblock %}

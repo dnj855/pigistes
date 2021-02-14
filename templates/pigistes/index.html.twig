@@ -1,0 +1,76 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} - pigistes{% endblock %}
+
+    {% block page_content %}
+        <div class="row">
+            <div class="col-12">
+                <div class="bg-dark text-white rounded-lg p-5 mt-2 mb-2">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <div class="col-9">
+                            <h1 class="display-4">Gestion des pigistes</h1>
+                        </div>
+                        <div class="col-3">
+                            <a href="{{ path('pigistes_add') }}" class="btn btn-outline-info float-end">
+                                <i class="fas fa-plus">
+                                </i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% if pigistes == null %}
+            <div class="alert alert-info">Aucun pigiste enregistré</div>
+        {% endif %}
+        <div class="row">
+            <div class="col-11 offset-1">
+                <div class="accordion" id="accordion">
+                    {% for pigiste in pigistes %}
+                        <div class="accordion-item">
+                            <h2 class="accordion-header" id="heading{{ pigiste.id }}">
+                                <button class="accordion-button collapsed"
+                                        type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#collapse{{ pigiste.id }}" aria-expanded="true"
+                                        aria-controls="collapse{{ pigiste.id }}">
+                                    <strong>{{ pigiste.nom }}</strong>&nbsp;{{ pigiste.prenom }}
+                                    &nbsp;<small>({{ pigiste.matricule }})</small>
+                                </button>
+                            </h2>
+                            <div id="collapse{{ pigiste.id }}"
+                                 class="accordion-collapse collapse"
+                                 aria-labelledby="heading{{ pigiste.id }}" data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+                                    <div class="row align-items-center justify-content-between">
+                                        <div class="col order-first">
+                                            <a href="{{ path('pigistes_edit', { id : pigiste.id }) }}"
+                                               class="btn btn-sm btn-outline-info">modifier</a>
+                                            <a href="{{ path('pigistes_deactivate', { id : pigiste.id }) }}"
+                                               class="btn btn-sm btn-outline-info">desactiver</a>
+                                        </div>
+                                        <div class="col">
+                                            {{ pigiste.adresse }}<br/>
+                                            {{ pigiste.codePostal }}&nbsp;{{ pigiste.ville }}
+                                        </div>
+                                        <div class="col">
+                                            Né le {{ pigiste.dateDeNaissance|format_date('long', locale='fr') }}
+                                            à {{ pigiste.lieuDeNaissace }}<br/>
+                                            Numéro SS : {{ pigiste.SecuriteSociale }}
+                                        </div>
+                                        <div class="col bg-light border border-1 border-dark">
+                                            {% if pigiste.carteDePresse != null %}
+                                                Carte de presse n°{{ pigiste.carteDePresse }}<br/>
+                                                Date d'obtention : {{ pigiste.DateCartePresse|date("d M y") }}
+                                            {% else %}
+                                                Non carté
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    {% endblock %}

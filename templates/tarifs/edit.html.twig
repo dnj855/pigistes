@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} - modifier un tarif{% endblock %}
+
+{% block page_content %}
+    <div class="row">
+        <div class="col-12">
+            <div class="bg-dark text-white rounded-lg p-5 mt-2 mb-2">
+                <div class="d-flex align-items-center justify-content-between">
+                    <div class="col-10">
+                        <h1 class="display-4 mb-0 pb-0">Modifier un tarif<br/></h1>
+                        <small class="text-info display-6 mt-0 pt-0">{{ tarif.name }}</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6 offset-3">
+            <p>
+                {{ form(form) }}
+            </p>
+        </div>
+    </div>
+{% endblock %}

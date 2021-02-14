@@ -1,0 +1,111 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} - ajouter un pigiste{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker3.min.css"
+          integrity="sha512-rxThY3LYIfYsVCWPCW9dB0k+e3RZB39f23ylUYTEuZMDrN/vRqLdaCBo/FbvVT6uC2r0ObfPzotsfKF9Qc5W5g=="
+          crossorigin="anonymous"/>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"
+            integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js"
+            integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ=="
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.fr.min.js"
+            integrity="sha512-fx3aztaUjb4NyoD+Tso5g7R1l29bU3jnnTfNRKBiY9fdQOHzVhKJ10wEAgQ1zM/WXCzB9bnVryHD1M40775Tsw=="
+            crossorigin="anonymous"></script>
+{% endblock %}
+
+{% block page_content %}
+    <div class="row">
+        <div class="col-12">
+            <div class="bg-dark text-white rounded-lg p-5 mt-2 mb-2">
+                <div class="d-flex align-items-center justify-content-between">
+                    <div class="col-10">
+                        <h1 class="display-4 mb-0 pb-0">Ajouter un pigiste<br/></h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{ form_start(form) }}
+    <div class="row">
+        <div class="col-6">
+            <p class="mt-1">
+                {{ form_row(form.nom) }}
+            </p>
+            <p class="mt-1">
+                {{ form_row(form.prenom) }}
+            </p>
+            <p class="mt-1">
+                {{ form_row(form.date_de_naissance, { 'attr' : { 'class' : 'datepickern'}}) }}
+            </p>
+            <p class="mt-1">
+                {{ form_row(form.lieu_de_naissace) }}
+            </p>
+        </div>
+        <div class="col-6">
+            <p class="mt-1">
+                {{ form_row(form.adresse) }}
+            </p>
+            <p class="mt-1">
+                {{ form_row(form.code_postal) }}
+            </p>
+            <p class="mt-1">
+                {{ form_row(form.ville) }}
+            </p>
+            <p class="mt-1">
+                {{ form_row(form.nationalite) }}
+            </p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <p class="mt-1">
+                {{ form_row(form.securite_sociale) }}
+            </p>
+            <p class="mt-1">
+                {{ form_row(form.code_emploi) }}
+            </p>
+        </div>
+        <div class="col-6">
+            <p class="mt-1">
+                {{ form_row(form.matricule) }}
+            </p>
+            <p class="mt-1">
+                {{ form_row(form.libelle) }}
+            </p>
+        </div>
+    </div>
+    <div class="row border-light alert alert-info">
+        <div class="col-6">
+            <p class="mt-1">
+                {{ form_row(form.carte_de_presse) }}
+            </p>
+        </div>
+        <div class="col-6">
+            <p class="mt-1">
+                {{ form_row(form.date_carte_presse, { 'attr' : { 'class' : 'datepicker'}}) }}
+            </p>
+        </div>
+    </div>
+    {{ form_end(form) }}
+    <script>
+        $('.datepickern').datepicker({
+            format: "yyyy-mm-dd",
+            language: "fr",
+            startView: 3,
+            orientation: "bottom"
+        });
+        $('.datepicker').datepicker({
+            format: "yyyy-mm-dd",
+            language: "fr"
+        });
+    </script>
+{% endblock %}

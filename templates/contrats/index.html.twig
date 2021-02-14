@@ -1,0 +1,88 @@
+{% extends 'base.html.twig' %}
+
+{% block page_content %}
+    <div class="row">
+        <div class="col-12">
+            <div class="bg-dark text-white rounded-lg p-5 mt-2 mb-2">
+                <div class="d-flex align-items-center justify-content-between">
+                    <div class="col-9">
+                        <h1 class="display-4 mb-0">Gestion des contrats</h1>
+                        <p class="mt-0 text-info">{{ date|format_date(date_format='medium', locale='fr', pattern='MM/Y') }}</p>
+                    </div>
+                    <div class="col-3">
+                        <a href="{{ path('contrats_add') }}" class="btn btn-outline-info float-end">
+                            <i class="fas fa-plus">
+                            </i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 d-flex justify-content-between align-items-center">
+            <nav aria-label="Month navigation">
+                <ul class="pagination justify-content-center">
+                    {% if before_month == true %}
+                        {% if month == 1 %}
+                            <li class="page-item"><a class="page-link"
+                                                     href="{{ path('contrats_index', { 'month' : 12, 'year' : year - 1}) }}">Mois
+                                    précédent</a></li>
+                        {% else %}
+                            <li class="page-item"><a class="page-link"
+                                                     href="{{ path('contrats_index', { 'month' : month - 1, 'year' : year }) }}">Mois
+                                    précédent</a></li>
+                        {% endif %}
+                    {% endif %}
+                    {% if after_month == true %}
+                        {% if month == 12 %}
+                            <li class="page-item"><a class="page-link"
+                                                     href="{{ path('contrats_index', { 'month' : 1, 'year' : year + 1}) }}">Mois
+                                    suivant</a></li>
+                        {% else %}
+                            <li class="page-item"><a class="page-link"
+                                                     href="{{ path('contrats_index', { 'month' : month + 1, 'year' : year }) }}">Mois
+                                    suivant</a></li>
+                        {% endif %}
+                    {% endif %}
+                </ul>
+            </nav>
+            <div>
+                {{ knp_pagination_render(contrats) }}
+            </div>
+        </div>
+    </div>
+    <div class="row mb-5">
+        <div class="col-11 offset-1">
+            <ul class="list-group">
+                {% for contrat in contrats %}
+                    <li class="list-group-item d-flex justify-content-between">
+                        {% if contrat.active == true %}
+                        <div>
+                            <a class="fas fa-edit text-info text-decoration-none"
+                               href="{{ path('contrats_edit', { 'id' : contrat.id}) }}"></a>
+                            <a class="fas fa-print text-info text-decoration-none"
+                               href="{{ path('contrats_print', { 'id' : contrat.id }) }}"></a>
+                        </div>
+                        {% else %}
+                            <div>
+                                <i class="fas fa-ban"></i>
+                            </div>
+                            {% endif %}
+                        <div class="text-center{% if contrat.active != true %} text-danger{% endif %}">{{ contrat.pigiste.prenom }} {{ contrat.pigiste.nom }}</div>
+                        <div class="text-center{% if contrat.active != true %} text-danger{% endif %}">{{ contrat.dateDebut|date('d/m/Y') }}
+                            - {{ contrat.dateFin|date('d/m/Y') }}</div>
+                        <div>{% if contrat.active == true %}
+                                <a class="far fa-trash-alt text-info text-decoration-none"
+                                   href="{{ path('contrats_disable', { 'id' : contrat.id }) }}"></a>
+                            {% else %}
+                                <a class="far fa-redo-alt text-info text-decoration-none"
+                                   href="{{ path('contrats_enable', { 'id' : contrat.id }) }}"></a>
+                            {% endif %}
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+{% endblock %}

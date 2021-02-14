@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ parent() }} - générer les DRP{% endblock %}
+
+    {% block page_content %}
+        <div class="row">
+            <div class="col-12">
+                <div class="bg-dark text-white rounded-lg p-5 mt-2 mb-2">
+                    <div class="d-flex align-items-center justify-content-between">
+                        <div class="col">
+                            <h1 class="display-4">Générer les DRP</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-11 offset-1">
+                <ul class="list-group">
+                    {% for month in months %}
+                        <li class="list-group-item d-flex justify-content-between">
+                            <a href="{{ path('drp_generate', { 'month' : month.format('m'), 'year' : month.format('Y')}) }}">
+                                {{ month|format_date(dateFormat='medium', locale='fr', pattern='MMMM yyyy') }}
+                            </a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    {% endblock %}
