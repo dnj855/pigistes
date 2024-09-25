@@ -61,7 +61,7 @@ class ContratsType extends AbstractType
                 'expanded' => false,
                 'placeholder' => "Choisir un tarif"
             ])
-            ->add('submit', SubmitType::class, [
+            ->ad('submit', SubmitType::class, [
                 'label' => 'Générer'
             ]);
     }
